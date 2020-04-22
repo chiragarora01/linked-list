@@ -325,4 +325,17 @@ void circular_insert_end()
         p->next=temp;
     }
 }
-
+void circular_delete_front()
+{
+    struct node *p;
+    p=head;
+    if(head->next=head)
+        free(head);
+    else
+    {
+        while(p->next!=head)
+        {
+            p=p->next;
+        }
+    }
+}
