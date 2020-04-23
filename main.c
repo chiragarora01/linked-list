@@ -145,8 +145,19 @@ void delete_end()
         {
             p=p->next;
         }
+        p->next=NULL;
         free(p->next);
 
+    }
+}
+void display()
+{
+    struct node *p;
+    p=head;
+    while(p!=NULL)
+    {
+        printf("%d",p->data);
+        p=p->next;
     }
 }
 void double_front_insert()
@@ -170,6 +181,33 @@ void double_front_insert()
         temp->prev=NULL;
         headed->prev=temp;
         headed=temp;
+    }
+}
+void double_mid_insert()
+{
+    struct noded* temp,*p;
+    int num,pos;
+    printf("\nenter the position ");
+    scanf("%d",&pos);
+    printf("\nenter the data ");
+    scanf("%d",&num);
+    temp=(struct noded*)malloc(sizeof(struct noded));
+    temp->data=num;
+    p=headed;
+    if (headed==NULL)
+    {
+        headed=temp;
+    }
+    else
+    {
+         for(int i=0;i<pos;i++)
+        {
+            p=p->next;
+        }
+        temp->next=p->next;
+        temp->prev=p;
+        p->next=temp;
+        temp->next->prev=temp;
     }
 }
 void double_end_insert()
@@ -200,46 +238,67 @@ void double_end_insert()
 
     }
 }
-void double_mid_insert()
+void double_front_delete()
 {
-    struct noded* temp,*p;
-    int num,pos;
-    printf("\nenter the position ");
-    scanf("%d",&pos);
-    printf("\nenter the data ");
-    scanf("%d",&num);
-    temp=(struct noded*)malloc(sizeof(struct noded));
-    temp->data=num;
-    p=headed;
-    if (headed==NULL)
+    struct noded *p,*temp;
+    p=head;
+    if (head->next=NULL)
     {
-        headed=temp;
+        head=NULL;
+        free(head);
     }
     else
     {
-         for(int i=0;i<pos;i++)
+        temp=head;
+        head=temp->next;
+        head->prev=NULL;
+        free(temp);
+    }
+}
+void double_mid_delete()
+{
+     struct noded *p,*temp;
+    p=head;
+    if (head->next==NULL)
+    {
+        head=NULL;
+        free(head);
+    }
+    else
+    {
+        while(i<loc)
+        {
+            p=p->next;
+            i++;
+        }
+    temp=p->next;
+    p->next=temp->next;
+    temp->prev=NULL;
+    free(p);
+    }
+}
+void double_end_delete()
+{
+    struct noded *p,*temp;
+    p=head;
+    if (head->next==NULL)
+    {
+        head=NULL;
+        free(head);
+    }
+    else
+    {
+        while(p->next!=NULL)
         {
             p=p->next;
         }
-        temp->next=p->next;
-        temp->prev=p;
-        p->next=temp;
-        temp->next->prev=temp;
-    }
-}
-void display()
-{
-    struct node *p;
-    p=head;
-    while(p!=NULL)
-    {
-        printf("%d",p->data);
-        p=p->next;
+        p->prev->next=NULL;
+        free(p);
     }
 }
 void double_display()
 {
-    struct node *p;
+    struct noded *p;
     p=headed;
     while(p!=NULL)
     {
@@ -329,13 +388,78 @@ void circular_delete_front()
 {
     struct node *p;
     p=head;
-    if(head->next=head)
+    if(head->next==head)
+    {
+        head=NULL;
         free(head);
+    }
     else
     {
         while(p->next!=head)
         {
             p=p->next;
         }
+        p->next=head->next;
+        head->next=NULL;
+        free(head);
+        head=p->next;
     }
 }
+void circular_delete_mid()
+{
+    struct node *temp,*p;
+    int pos;
+    p=head;
+    printf("\nenter the position ");
+    scanf("%d",&pos);
+
+    if(p->next==head)
+    {
+        head=NULL;
+        free(head);
+    }
+    else
+    {
+        for(int i=0;i<pos;i++)
+        {
+            p=p->next;
+        }
+        temp=p->next;
+        p->next=temp->next;
+        free(temp);
+    }
+}
+void circular_delete_end()
+{
+    struct node *p;
+    p=head;
+    if(head->next==head)
+        {
+            head=NULL;
+            free(head);
+        }
+    else
+    {
+        while(p->next->next!=head)
+        {
+            p=p->next;
+        }
+    temp=p->next;
+    p->next=p->next->next;
+    free(temp);
+}
+void circular_display()
+{
+    struct node *p;
+    p=head;
+    while(p!=NULL)
+    {
+        printf("%d",p->data);
+        p=p->next;
+    }
+}
+
+
+
+
+
