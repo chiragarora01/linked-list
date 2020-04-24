@@ -17,13 +17,9 @@ struct noded* headed=NULL;
 
 int main()
 {
-    insert_front();
-    display();
-    delete_front();
-    display();
+
     return 0;
 }
-
 void insert_front()
 {
     struct node* temp;
@@ -159,7 +155,9 @@ void display()
         printf("%d",p->data);
         p=p->next;
     }
+    printf("\n");
 }
+
 void double_front_insert()
 {
     struct noded* temp;
@@ -241,23 +239,24 @@ void double_end_insert()
 void double_front_delete()
 {
     struct noded *p,*temp;
-    p=head;
-    if (head->next=NULL)
+    p=headed;
+    if (headed->next=NULL)
     {
-        head=NULL;
+        headed=NULL;
         free(head);
     }
     else
     {
         temp=head;
-        head=temp->next;
-        head->prev=NULL;
+        headed=temp->next;
+        headed->prev=NULL;
         free(temp);
     }
 }
 void double_mid_delete()
 {
-     struct noded *p,*temp;
+    int i,loc;
+    struct noded *p,*temp;
     p=head;
     if (head->next==NULL)
     {
@@ -431,7 +430,7 @@ void circular_delete_mid()
 }
 void circular_delete_end()
 {
-    struct node *p;
+    struct node *p,*temp;
     p=head;
     if(head->next==head)
         {
@@ -458,8 +457,20 @@ void circular_display()
         p=p->next;
     }
 }
+void reverse()
+{
 
-
-
+    struct node *prev,*current,*next1;
+    prev=0;
+    current=next1=head;
+    while(next1!=0)
+    {
+        next1=next1->next;
+        current->next=prev;
+        prev=current;
+        current=next1;
+    }
+    head=prev;
+}
 
 
