@@ -456,7 +456,7 @@ void circular_display()
         printf("%d",p->data);
         p=p->next;
     }
-}
+
 void reverse()
 {
 
@@ -474,3 +474,4 @@ void reverse()
 }
 
 
+//chirag
